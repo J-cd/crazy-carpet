@@ -11,25 +11,26 @@
   };
   const BEAD_DENSITY = 2;
   const LEVEL_TIME_SECONDS = 180;
+  const EARLY_UNLOCK_COST = 360;
   const COLOR_NAMES = { p: '樱花粉', r: '番茄红', o: '蜜橙', y: '柠檬黄', g: '草地绿', m: '薄荷绿', b: '天空蓝', v: '葡萄紫', w: '奶油白', k: '炭黑', c: '腮红粉', n: '焦糖棕' };
   const TEMPLATES = [
-    { name: '小黄鸡', icon: '🐥', desc: '圆滚滚的第一颗拼豆', colors: ['y', 'o', 'k', 'c'], map: [
-      '...yyyy...', '..yyyyyy..', '.yyyyyyyy.', '.yykyykyy.', '.yyyyyyyy.', '..yyyoyy..', '...yoo y...'.replace(' ', '.'), '....yyyy..', '...yyyyyy.', '..yy....yy'
+    { name: '向日葵小黄鸡', icon: '🐥', desc: '花瓣、腮红和小脚丫', colors: ['y', 'o', 'k', 'c', 'g'], map: [
+      '....gggg....', '...gyyyyg...', '..gyyyyyyg..', '.gyyyyyyyy g.'.replace(' ', ''), '.yyykyykyyy.', '.yyyyyyyyyy.', '.yyyycycyyy.', '..yyyyyyyy..', '...yyyyyy...', '..oo.yyyy.oo', '.oo..yyyy..oo', '.....yyyy...'
     ] },
-    { name: '薄荷小蛙', icon: '🐸', desc: '眨眨眼，慢慢拼', colors: ['g', 'm', 'w', 'k', 'c'], map: [
-      '..gg..gg..', '.gggggggg.', 'ggwggggwgg', 'ggkggggkgg', 'gggggggggg', '.gggcccgg.', '..gggggg..', '.g..gg..g.', 'g...gg...g'
+    { name: '睡莲小蛙', icon: '🐸', desc: '眨眨眼，慢慢拼', colors: ['g', 'm', 'w', 'k', 'c', 'y'], map: [
+      '...gg..gg...', '..gggggggg..', '.ggwggggwgg.', '.ggkggggkgg.', 'gggggggggggg', 'gggyyyyyyggg', '.gggcccgggg.', '..gggggggg..', '.g..gggg..g.', 'g...gggg...g', '...mmmmmm...', '..mmmmmmmm..'
     ] },
-    { name: '樱花小猫', icon: '🐱', desc: '把耳朵一颗颗拼出来', colors: ['p', 'w', 'k', 'c'], map: [
-      '.p......p.', '.pp....pp.', '.pppppppp.', '.pwwppwwp.', '.pwkppkwp.', '.pppppppp.', '.ppccccpp.', '..pppppp..', '.p..pp..p.', 'p...pp...p'
+    { name: '樱花蝴蝶猫', icon: '🐱', desc: '耳尖、蝴蝶结和胡须', colors: ['p', 'w', 'k', 'c', 'v'], map: [
+      '.pp......pp.', '.ppp....ppp.', '.pppppppppp.', '.pwwppppwwp.', '.pwkppppkwp.', '.pppppppppp.', '.pppccccppp.', '..pppppppp..', '.vppppppppv.', 'vvv..pp..vvv', '.v...pp...v.', '.....pp.....'
     ] },
-    { name: '彩虹小鱼', icon: '🐠', desc: '颜色会游进海里', colors: ['b', 'm', 'y', 'o', 'r', 'w', 'k'], map: [
-      '.....bb...', '...bbbbb..', '.mmmmmybb.', 'mmwwwmyyb.', '.mmmmmybb.', '...bbbbb..', '.....bb...', '.......rr.', '......rrrr'
+    { name: '珊瑚彩虹鱼', icon: '🐠', desc: '鳞片和尾巴会闪闪发光', colors: ['b', 'm', 'y', 'o', 'r', 'w', 'k', 'v'], map: [
+      '.....bb.....', '...bbbbbb...', '.bbmmmmyybb.', 'bbmwwmoyybb', 'bbmkwmorrybb', 'bbmwwmoyybb', '.bbmmmmyybb.', '...bbbbbb...', '.....bb.rr..', '.......rrrr.', '......rrvrrr', '.......rrrr.'
     ] },
-    { name: '奶油熊', icon: '🐻', desc: '慢慢堆叠软乎乎', colors: ['n', 'w', 'k', 'c'], map: [
-      '..nn..nn..', '.nnnnnnnn.', '.nnwwwwnn.', 'nnwnnnnw nn'.replace(' ', ''), 'nnwnknnw nn'.replace(' ', ''), '.nnnnnnnn.', '.nnnccnnn.', '..nnnnnn..', '.n..nn..n.', 'n...nn...n'
+    { name: '草莓奶油熊', icon: '🐻', desc: '围巾、腮红和草莓帽', colors: ['n', 'w', 'k', 'c', 'r', 'g'], map: [
+      '...rrrrrr...', '..rgrrrrgr..', '..rrrrrrrr..', '.nn..nn..nn.', '.nnnnnnnnnn.', 'nnnwwwwwwnnn', 'nnwnnnnnwnnn', 'nnwnknnkw nnn'.replace(' ', ''), '.nnnnnnnnnn.', '.nnnccccnnn.', '..nnnnnnnn..', '.n..nnnn..n.', 'n...nnnn...n'
     ] },
-    { name: '紫葡萄龟', icon: '🐢', desc: '完成后记得熨烫定型', colors: ['v', 'g', 'm', 'w', 'k'], map: [
-      '....gg....', '...gggg...', '..vvvggvv.', '.vvvvvvvv.', 'vvvwwwwvvv', 'vvvwkkwvvv', '.vvvvvvvv.', '..vvvvvv..', '...v..v...', '..vv..vv..'
+    { name: '葡萄花园龟', icon: '🐢', desc: '龟甲上开着一朵小花', colors: ['v', 'g', 'm', 'w', 'k', 'y', 'c'], map: [
+      '.....gg.....', '....gggg....', '...vvggvv...', '..vvvvvvvv..', '.vvvyyyyvvv.', 'vvvvyccyvvvv', 'vvvvywwyvvvv', 'vvvywkkwyvvv', '.vvvvvvvvvv.', '..vvvvvvvv..', '...v..vv....', '..vv..vvvv..', '.vv....vvv..'
     ] }
   ];
 
@@ -47,15 +48,28 @@
   let last = performance.now();
   let board = null;
   let completed = loadCompleted();
+  let coins = loadNumber('bead-beans-coins');
+  let boughtUnlocks = loadList('bead-beans-bought-unlocks');
+  let levelStars = loadObject('bead-beans-level-stars');
+  let reward = null;
   let wrongFlash = 0;
   let timeRemaining = LEVEL_TIME_SECONDS;
   let levelDeadline = 0;
   let tenSecondReminderShown = false;
+  let boardZoom = 1;
 
   function loadCompleted() {
     try { return JSON.parse(localStorage.getItem('bead-beans-completed')) || []; } catch (_) { return []; }
   }
+  function loadNumber(key) { try { return Number(localStorage.getItem(key)) || 0; } catch (_) { return 0; } }
+  function loadList(key) { try { return JSON.parse(localStorage.getItem(key)) || []; } catch (_) { return []; } }
+  function loadObject(key) { try { return JSON.parse(localStorage.getItem(key)) || {}; } catch (_) { return {}; } }
   function saveCompleted() { localStorage.setItem('bead-beans-completed', JSON.stringify(completed)); }
+  function saveRewards() {
+    localStorage.setItem('bead-beans-coins', String(coins));
+    localStorage.setItem('bead-beans-bought-unlocks', JSON.stringify(boughtUnlocks));
+    localStorage.setItem('bead-beans-level-stars', JSON.stringify(levelStars));
+  }
   function resize() {
     const rect = host.getBoundingClientRect();
     W = Math.max(320, rect.width || 390); H = Math.max(560, rect.height || 780);
@@ -85,7 +99,7 @@
   function templateFilled(tpl) { return Object.values(templateCounts(tpl)).reduce((a, b) => a + b, 0); }
   function formatTime(seconds) { const safe = Math.max(0, seconds); return `${Math.floor(safe / 60)}:${String(safe % 60).padStart(2, '0')}`; }
   function showToast(value) { toast = value; toastUntil = performance.now() + 1500; }
-  function isUnlocked(i) { return i === 0 || completed.includes(i - 1); }
+  function isUnlocked(i) { return i === 0 || completed.includes(i - 1) || boughtUnlocks.includes(i); }
 
   function drawBackground() {
     const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#fbf7ef'); g.addColorStop(1, '#e6f0eb'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
@@ -148,23 +162,32 @@
     const size = 102; drawIronedTemplate(tpl, x + (width - size) / 2, y + 22, size);
     text('照着效果图来拼', x + width / 2, y + 128, 10, '#5c8c80', 'center', '700');
   }
+  function drawZoomControls() {
+    const x = 20, y = 88;
+    roundRect(x, y, 112, 38, 19, '#ffffffd9', '#d8e7e1');
+    roundRect(x + 4, y + 4, 30, 30, 15, '#eff7f2'); text('−', x + 19, y + 19, 21, '#47766b', 'center', '700');
+    text(`${Math.round(boardZoom * 100)}%`, x + 56, y + 19, 11, '#47645c', 'center', '800');
+    roundRect(x + 78, y + 4, 30, 30, 15, '#d9f0e5'); text('+', x + 93, y + 19, 20, '#286d5d', 'center', '800');
+  }
   function drawShelf() {
     drawHeader('拼豆豆', `已完成 ${completed.length} / ${TEMPLATES.length} 张小动物图纸`);
+    roundRect(W - 116, 22, 94, 34, 17, '#fff5d8', '#f1d993'); text(`豆币 ${coins}`, W - 69, 39, 12, '#9a6a23', 'center', '800');
     roundRect(20, 88, W - 40, 76, 20, '#2e655d');
-    text('今天拼哪一只小动物？', 38, 114, 18, '#fffdf6', 'left', '800'); text('拾取颜色拼豆，填满透明拼豆板', 38, 138, 12, '#d9f1de');
+    text('今天拼哪一只小动物？', 38, 114, 18, '#fffdf6', 'left', '800'); text('通关赢豆币和金星，可提前解锁图纸', 38, 138, 12, '#d9f1de');
     const cols = 2, gap = 13, cardW = (W - 40 - gap) / 2, cardH = 168, startY = 184;
     TEMPLATES.forEach((tpl, i) => {
       const col = i % cols, row = Math.floor(i / cols), x = 20 + col * (cardW + gap), y = startY + row * (cardH + gap); const unlocked = isUnlocked(i), done = completed.includes(i);
       shadow(); roundRect(x, y, cardW, cardH, 20, unlocked ? '#ffffff' : '#dde5df'); clearShadow();
       if (unlocked) { roundRect(x + 12, y + 12, 58, 58, 16, '#f8f2e4'); miniTemplate(tpl, x + 17, y + 17, 48); text(tpl.name, x + 14, y + 92, 16, '#29413e', 'left', '800'); text(tpl.desc, x + 14, y + 115, 11, '#84918b');
-        roundRect(x + 13, y + 133, cardW - 26, 23, 11, done ? '#d9f1df' : '#f8e6b5'); text(done ? '已定型 ✓' : '开始拼豆', x + cardW / 2, y + 145, 11, done ? '#36815d' : '#986527', 'center', '800');
-      } else { text('🔒', x + cardW / 2, y + 58, 27, '#7b8b82', 'center'); text('完成上一张解锁', x + cardW / 2, y + 98, 12, '#738078', 'center'); }
+        const stars = levelStars[i] || 0; text(stars ? `${'★'.repeat(stars)}${'☆'.repeat(3 - stars)}` : '奖励 ★×3', x + cardW - 12, y + 24, 10, stars ? '#efad35' : '#94a59d', 'right', '800');
+        roundRect(x + 13, y + 133, cardW - 26, 23, 11, done ? '#d9f1df' : '#f8e6b5'); text(done ? `已定型 · ${'★'.repeat(stars || 1)}` : '开始拼豆', x + cardW / 2, y + 145, 11, done ? '#36815d' : '#986527', 'center', '800');
+      } else { text('🔒', x + cardW / 2, y + 51, 27, '#7b8b82', 'center'); text('完成上一张解锁', x + cardW / 2, y + 85, 12, '#738078', 'center'); roundRect(x + 13, y + 116, cardW - 26, 28, 14, coins >= EARLY_UNLOCK_COST ? '#f8e0a6' : '#d3ddd7'); text(`${EARLY_UNLOCK_COST} 豆币提前解锁`, x + cardW / 2, y + 130, 10, coins >= EARLY_UNLOCK_COST ? '#8d5b1e' : '#76857e', 'center', '800'); }
     });
     text('真实玩法小提示：先选颜色，再轻点空的拼豆柱', W / 2, H - 24, 12, '#749083', 'center');
   }
   function setBoard() {
     const tpl = TEMPLATES[level], { rows, cols } = gridDimensions(tpl);
-    const maxWidth = W - 70, maxHeight = Math.min(H * .43, 330); const step = Math.min(maxWidth / (cols + 1), maxHeight / (rows + 1), 18);
+    const maxWidth = W - 96, maxHeight = Math.min(H * .40, 308); const baseStep = Math.min(maxWidth / (cols + 1), maxHeight / (rows + 1), 18); const step = baseStep * boardZoom;
     const bw = cols * step + 30, bh = rows * step + 30, bx = (W - bw) / 2, by = 160;
     board = { bx, by, bw, bh, step, rows, cols };
   }
@@ -210,6 +233,7 @@
     drawReferenceCard();
     drawPegboard(); drawPalette();
     if (selectedColor && phase === 'placing') { roundRect(26, 112, W - 52, 24, 12, '#ffefc9'); text(`已选择 ${COLOR_NAMES[selectedColor]} 拼豆 · 对照右上效果图放置`, W / 2, 124, 11, '#946a32', 'center', '700'); }
+    drawZoomControls();
     if (phase === 'placing' && timeRemaining <= 10) { roundRect(30, 140, W - 60, 25, 12, '#ffe0cc'); text(`最后 ${timeRemaining} 秒，快完成这张拼豆图！`, W / 2, 152, 11, '#b85f42', 'center', '800'); }
     if (phase === 'timeup') drawTimeUp();
   }
@@ -221,13 +245,16 @@
   function drawComplete() {
     drawBackground(); const tpl = TEMPLATES[level];
     const age = performance.now() - resultStarted;
-    text('熨烫完成！', W / 2, 95, 32, '#284942', 'center', '900'); text(`${tpl.name} 变成完整拼豆作品啦`, W / 2, 125, 15, '#6f847c', 'center');
-    shadow('#5a78602b', 16, 7); roundRect(45, 160, W - 90, 300, 28, '#ffffff'); clearShadow();
-    const glow = .22 + .18 * Math.max(0, 1 - age / 1800); ctx.globalAlpha = glow; ctx.fillStyle = '#ffd85a'; ctx.beginPath(); ctx.arc(W / 2, 307, 135 + Math.sin(age / 120) * 7, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1;
-    const size = Math.min(220, W - 130); drawIronedTemplate(tpl, (W - size) / 2, 190, size); text('与右上角效果图一致 ✓', W / 2, 424, 14, '#637e73', 'center', '800');
-    if (age < 2300) { ctx.globalAlpha = Math.max(0, 1 - age / 2300); for (let i = 0; i < 10; i++) { const a = i * Math.PI * 2 / 10 + age / 700; const d = 120 + Math.sin(age / 180 + i) * 12; text('✦', W / 2 + Math.cos(a) * d, 308 + Math.sin(a) * d * .72, 18, i % 2 ? '#ffb84c' : '#55af92', 'center', '800'); } ctx.globalAlpha = 1; }
-    roundRect(45, 500, W - 90, 52, 25, '#2f8e75'); text(level < TEMPLATES.length - 1 ? '去拼下一只小动物 →' : '回到动物图纸柜', W / 2, 526, 16, '#ffffff', 'center', '800');
-    roundRect(45, 566, W - 90, 44, 22, '#f3e4bc'); text('再拼一次', W / 2, 588, 14, '#9a6b30', 'center', '800');
+    text('熨烫完成！', W / 2, 82, 31, '#284942', 'center', '900'); text(`${tpl.name} 变成完整拼豆作品啦`, W / 2, 112, 15, '#6f847c', 'center');
+    shadow('#5a78602b', 16, 7); roundRect(45, 138, W - 90, 360, 28, '#ffffff'); clearShadow();
+    const glow = .22 + .18 * Math.max(0, 1 - age / 1800); ctx.globalAlpha = glow; ctx.fillStyle = '#ffd85a'; ctx.beginPath(); ctx.arc(W / 2, 265, 112 + Math.sin(age / 120) * 7, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1;
+    const size = Math.min(174, W - 150); drawIronedTemplate(tpl, (W - size) / 2, 162, size); text('与右上角效果图一致 ✓', W / 2, 358, 13, '#637e73', 'center', '800');
+    if (age < 2300) { ctx.globalAlpha = Math.max(0, 1 - age / 2300); for (let i = 0; i < 10; i++) { const a = i * Math.PI * 2 / 10 + age / 700; const d = 104 + Math.sin(age / 180 + i) * 10; text('✦', W / 2 + Math.cos(a) * d, 265 + Math.sin(a) * d * .72, 17, i % 2 ? '#ffb84c' : '#55af92', 'center', '800'); } ctx.globalAlpha = 1; }
+    const earned = reward || { total: 100, speed: 0, first: 0, stars: 1 }; roundRect(67, 382, W - 134, 88, 18, '#fff6dc', '#f0dc9e');
+    text(`★ ${'★'.repeat(earned.stars)}${'☆'.repeat(3 - earned.stars)}`, W / 2, 402, 17, '#e7a52d', 'center', '900'); text(`本关获得  +${earned.total} 豆币`, W / 2, 427, 18, '#8a5b1d', 'center', '900');
+    text(`通关 100${earned.speed ? ` · 速度 +${earned.speed}` : ''}${earned.first ? ` · 首通 +${earned.first}` : ''}`, W / 2, 451, 10, '#9c7d4c', 'center', '700');
+    roundRect(45, 522, W - 90, 52, 25, '#2f8e75'); text(level < TEMPLATES.length - 1 ? '去拼下一只小动物 →' : '回到动物图纸柜', W / 2, 548, 16, '#ffffff', 'center', '800');
+    roundRect(45, 588, W - 90, 44, 22, '#f3e4bc'); text('再拼一次（可继续赚豆币）', W / 2, 610, 14, '#9a6b30', 'center', '800');
   }
   function drawToast() { if (performance.now() >= toastUntil) return; const w = Math.min(W - 40, Math.max(150, toast.length * 14 + 38)); shadow('#332d2840', 10, 4); roundRect((W - w) / 2, H - 58, w, 34, 17, '#314943'); clearShadow(); text(toast, W / 2, H - 41, 12, '#ffffff', 'center', '700'); }
   function drawParticles() { particles.forEach(p => { ctx.globalAlpha = p.life; ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill(); }); ctx.globalAlpha = 1; }
@@ -235,12 +262,24 @@
 
   function hitShelf(x, y) {
     const cols = 2, gap = 13, cardW = (W - 40 - gap) / 2, cardH = 168, startY = 184;
-    TEMPLATES.forEach((_, i) => { const col = i % cols, row = Math.floor(i / cols), cx = 20 + col * (cardW + gap), cy = startY + row * (cardH + gap); if (x >= cx && x <= cx + cardW && y >= cy && y <= cy + cardH && isUnlocked(i)) startLevel(i); });
+    TEMPLATES.forEach((_, i) => {
+      const col = i % cols, row = Math.floor(i / cols), cx = 20 + col * (cardW + gap), cy = startY + row * (cardH + gap);
+      if (x < cx || x > cx + cardW || y < cy || y > cy + cardH) return;
+      if (isUnlocked(i)) { startLevel(i); return; }
+      if (coins >= EARLY_UNLOCK_COST) { coins -= EARLY_UNLOCK_COST; boughtUnlocks.push(i); saveRewards(); showToast(`花费 ${EARLY_UNLOCK_COST} 豆币，提前解锁成功！`); }
+      else showToast(`还差 ${EARLY_UNLOCK_COST - coins} 豆币，继续通关吧`);
+    });
   }
-  function startLevel(i) { level = i; placed = new Set(); selectedColor = null; phase = 'placing'; timeRemaining = LEVEL_TIME_SECONDS; levelDeadline = performance.now() + LEVEL_TIME_SECONDS * 1000; tenSecondReminderShown = false; screen = 'play'; setBoard(); }
+  function startLevel(i) { level = i; placed = new Set(); selectedColor = null; reward = null; phase = 'placing'; timeRemaining = LEVEL_TIME_SECONDS; levelDeadline = performance.now() + LEVEL_TIME_SECONDS * 1000; tenSecondReminderShown = false; boardZoom = 1; screen = 'play'; setBoard(); }
   function hitPlay(x, y) {
     if (x < 64 && y < 72) { screen = 'shelf'; return; }
     if (phase === 'timeup') { if (y > H * .31 + 100 && y < H * .31 + 168) startLevel(level); return; }
+    if (y >= 88 && y <= 126 && x >= 20 && x <= 132) {
+      if (x < 54) boardZoom = Math.max(1, +(boardZoom - .1).toFixed(1));
+      else if (x > 96) boardZoom = Math.min(1.3, +(boardZoom + .1).toFixed(1));
+      else return;
+      setBoard(); showToast(boardZoom === 1 ? '已恢复原始大小' : `底板已放大到 ${Math.round(boardZoom * 100)}%`); return;
+    }
     const layout = paletteLayout(TEMPLATES[level]);
     if (phase === 'ironReady') { if (y > layout.y + layout.height - 54 && y < layout.y + layout.height - 4) { phase = 'ironing'; ironProgress = 0; return; } }
     if (phase !== 'placing') return;
@@ -256,9 +295,15 @@
     placed.add(key); burst(x, y, COLORS[selectedColor]);
     if (placed.size === templateFilled(tpl)) { selectedColor = null; phase = 'ironReady'; showToast('全部拼好了！熨烫一下吧'); }
   }
-  function hitComplete(x, y) { if (y >= 500 && y <= 552) { if (level < TEMPLATES.length - 1) startLevel(level + 1); else screen = 'shelf'; } else if (y >= 566 && y <= 610) startLevel(level); }
+  function hitComplete(x, y) { if (y >= 522 && y <= 574) { if (level < TEMPLATES.length - 1) startLevel(level + 1); else screen = 'shelf'; } else if (y >= 588 && y <= 632) startLevel(level); }
   function burst(x, y, color) { for (let i = 0; i < 12; i++) particles.push({ x, y, vx: (Math.random() - .5) * 3.2, vy: -Math.random() * 3 - .4, size: 2 + Math.random() * 3, life: 1, color }); }
-  function finishLevel() { if (!completed.includes(level)) { completed.push(level); completed.sort((a, b) => a - b); saveCompleted(); } particles = []; resultStarted = performance.now(); for (let i = 0; i < 80; i++) particles.push({ x: W / 2, y: H * .36, vx: (Math.random() - .5) * 7, vy: -Math.random() * 7 - 1, size: 3 + Math.random() * 4, life: 1, color: Object.values(COLORS)[i % 8] }); screen = 'complete'; }
+  function finishLevel() {
+    const first = !completed.includes(level); const stars = timeRemaining >= 100 ? 3 : timeRemaining >= 45 ? 2 : 1;
+    const speed = Math.floor(timeRemaining / 20) * 10; const firstBonus = first ? 80 : 0; const total = 100 + speed + firstBonus;
+    reward = { total, speed, first: firstBonus, stars }; coins += total; levelStars[level] = Math.max(levelStars[level] || 0, stars);
+    if (first) { completed.push(level); completed.sort((a, b) => a - b); saveCompleted(); }
+    saveRewards(); particles = []; resultStarted = performance.now(); for (let i = 0; i < 80; i++) particles.push({ x: W / 2, y: H * .36, vx: (Math.random() - .5) * 7, vy: -Math.random() * 7 - 1, size: 3 + Math.random() * 4, life: 1, color: Object.values(COLORS)[i % 8] }); screen = 'complete';
+  }
   function animate(now) {
     const dt = Math.min(40, now - last); last = now;
     particles = particles.filter(p => { p.x += p.vx * dt / 16; p.y += p.vy * dt / 16; p.vy += .1 * dt / 16; p.life -= .018 * dt / 16; return p.life > 0; });
